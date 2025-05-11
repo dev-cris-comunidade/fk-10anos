@@ -1,0 +1,77 @@
+### **SITE COMEMORATIVO — 10 ANOS DE FK**
+
+---
+
+### 1. **Objetivo do Site**
+
+> Criar um espaço digital afetivo, histórico e interativo para celebrar os 10 anos da FK, valorizando a trajetória coletiva, a memória afetiva e os vínculos formados na comunidade.
+> 
+
+---
+
+### 2. **Estrutura Geral do Site**
+
+| Página / Seção | Conteúdo |
+| --- | --- |
+| **Home (Início)** | Boas-vindas emocionais, chamada para explorar o site, e botão para enviar depoimento |
+| **Linha do Tempo** | Navegável por ano, com festas, sociais e eventos organizados em ordem cronológica |
+| **Depoimentos** | Espaço aberto para membros deixarem relatos sobre a FK em suas vidas |
+| **Homenagens** | Página para homenagear membros falecidos, com espaço para textos e fotos |
+| **Famílias FK** | Relatos e fotos de famílias e relações formadas na FK |
+| **Galeria de Fotos** | Imagens selecionadas de festas e encontros (com curadoria prévia) |
+| **Participe / Contribua** | Formulário para enviar fotos, histórias, homenagens ou ajudar no projeto |
+| **Sobre a FK** | História da FK, valores, propósito da comunidade |
+
+---
+
+### 3. **Funcionalidades Interativas**
+
+- **Linha do tempo interativa**: navegável por ano, com ícones para "Festa", "Social Teórica", "Lounge", "Especial".
+- **Envio de depoimentos**: formulário simples com nome (opcional), texto, foto (opcional) e consentimento.
+- **Comentários e reações (corações, beijos, emojis)** em cada evento ou depoimento.
+- **Filtro na galeria de eventos por tipo e ano**.
+- **Busca por palavra-chave nos depoimentos e homenagens.**
+
+---
+
+### 4. **Orientações Técnicas**
+
+- **Tecnologia sugerida**:
+    - Criar front end e back end
+- **Responsivo**: Site adaptável para celulares, tablets e desktops.
+- **Leve e rápido**: Evitar excesso de scripts e imagens pesadas.
+
+---
+
+### 5. **Design e Identidade Visual**
+
+- **Logo existente da FK** no anexo
+- **Instagram da FK para inspirar:** https://www.instagram.com/fkeventosnm/
+**Paleta de cores**:
+- conectar com identidade original da FK, criar uma paleta especial para o site comemorativo.
+- **Fonte amigável e legível**, com toques festivos mas sem exageros.
+- **Estilo visual**:
+    - Mistura de festa + memória afetiva
+    - Emoção sem pieguice, liberdade com acolhimento, respeito a diversidade
+
+---
+
+### 6. **Textos de referência (rascunhos iniciais)**
+
+- **Home (Boas-vindas)**:
+    
+    > "A FK faz 10 anos. E nada disso teria sentido sem você.
+    > 
+    > 
+    > Esse site é um presente coletivo — feito para lembrar, honrar, rir, chorar e, claro… beijar.
+    > 
+    > Navegue pelos anos, envie seu depoimento, veja quem fez história com a gente. Esse amor é de todxs nós."
+    > 
+- **Chamada para depoimentos**:
+    
+    > "Tem algo que só a FK poderia ter proporcionado? Um beijo, um encontro, um começo, uma virada? Conta pra gente e deixa esse momento registrado."
+    > 
+- **Espaço de homenagens**:
+    
+    > "Algumas pessoas fizeram tanto parte da FK que continuam aqui, mesmo que não estejam mais. Essa página é pra lembrar com carinho e gratidão."
+    >
