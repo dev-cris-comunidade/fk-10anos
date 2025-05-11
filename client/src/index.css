@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 300 30% 98%;
+  --foreground: 272 57% 10%;
+  --muted: 300 10% 95%;
+  --muted-foreground: 272 20% 45%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 272 57% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 272 57% 10%;
+  --border: 272 10% 90%;
+  --input: 272 10% 90%;
+  --primary: 272 57% 24%; /* FK Purple - #3A1B5D */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 348 100% 55%; /* FK Red - #FF1A44 */
+  --secondary-foreground: 0 0% 100%;
+  --accent: 348 100% 74%; /* FK Pink - #FF8FB8 */
+  --accent-foreground: 272 57% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 272 57% 24%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 272 30% 4%;
+  --foreground: 300 20% 98%;
+  --muted: 272 20% 15%;
+  --muted-foreground: 300 10% 70%;
+  --popover: 272 30% 7%;
+  --popover-foreground: 300 20% 98%;
+  --card: 272 30% 7%;
+  --card-foreground: 300 20% 98%;
+  --border: 272 20% 20%;
+  --input: 272 20% 20%;
+  --primary: 272 57% 35%; /* Slightly lighter for dark mode */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 348 100% 60%;
+  --secondary-foreground: 0 0% 100%;
+  --accent: 348 70% 55%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 272 57% 50%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans bg-background text-foreground antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+@layer components {
+  /* Timeline component styles */
+  .timeline-item:after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background-color: hsl(var(--primary));
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    z-index: -1;
+  }
+
+  .timeline-item:last-child:after {
+    height: 50%;
+  }
+
+  .timeline-year:before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: hsl(var(--secondary));
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+  /* Event card styles */
+  .event-card {
+    transition: all 0.3s ease;
+  }
+
+  .event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(58, 27, 93, 0.1);
+  }
+
+  /* Emoji reaction styles */
+  .emoji-reaction {
+    transition: transform 0.2s ease;
+  }
+
+  .emoji-reaction:hover {
+    transform: scale(1.2);
+  }
+
+  /* Background gradients */
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.8) 100%);
+  }
+
+  /* Gallery hover effects */
+  .gallery-item {
+    overflow: hidden;
+  }
+
+  .gallery-item img {
+    transition: transform 0.5s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Heart animation */
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+
+  .heart-icon {
+    animation: heartbeat 1.5s infinite;
+  }
+
+  .hero-section {
+    min-height: 100vh;
+  }
+
+  /* Mobile menu styles */
+  .mobile-menu {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .mobile-menu.active {
+    transform: translateX(0);
+  }
+
+  .font-script {
+    font-family: 'Dancing Script', cursive;
+  }
+}
