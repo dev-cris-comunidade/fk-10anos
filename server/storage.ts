@@ -72,7 +72,15 @@ export class MemStorage implements IStorage {
     
     // Populate with initial data
     this.initializeEvents();
-    this.initializeSampleData();
+    
+    // Initialize sample data asynchronously
+    (async () => {
+      try {
+        await this.initializeSampleData();
+      } catch (error) {
+        console.error("Error initializing sample data:", error);
+      }
+    })();
   }
   
   private initializeEvents() {
@@ -87,87 +95,157 @@ export class MemStorage implements IStorage {
     });
   }
   
-  private initializeSampleData() {
-    // Add sample depoimentos
-    const depoimentoMariana = {
-      name: "Mariana S.",
-      content: "A FK foi onde encontrei coragem para ser quem eu realmente sou. Em 2018, no meu primeiro evento, percebi que existia um lugar onde a liberdade e o respeito podiam coexistir. Formei amizades que levo para a vida e aprendi sobre relacionamentos de uma forma que nenhum outro espaço permitiria.",
-      year: 2018,
-      memberSince: 2016,
-      imageUrl: ""
-    };
-    const newDepoimentoMariana = this.insertDepoimento(depoimentoMariana);
-    this.depoimentosData.set(newDepoimentoMariana.id, { ...newDepoimentoMariana, approved: true });
-    
-    const depoimentoRafael = {
-      name: "Rafael T.",
-      content: "Conheci meu atual marido na FK de 2017! Quem diria que um evento assim pudesse criar uma família? Conversamos a noite toda numa Social Teórica, trocamos contato e nunca mais nos separamos. A FK não é só festa, é um espaço de conexões profundas e transformadoras. Sou eternamente grato.",
-      year: 2017,
-      memberSince: 2015,
-      imageUrl: ""
-    };
-    const newDepoimentoRafael = this.insertDepoimento(depoimentoRafael);
-    this.depoimentosData.set(newDepoimentoRafael.id, { ...newDepoimentoRafael, approved: true });
-    
-    // Add sample homenagens
-    const homenagemCarlos = {
-      name: "Carlos S.",
-      yearStart: 2016,
-      yearEnd: 2022,
-      content: "Seu sorriso iluminava todas as festas. Sua generosidade e espírito livre inspiraram muitos de nós. Continuamos dançando por você.",
-      imageUrl: ""
-    };
-    const newHomenagemCarlos = this.insertHomenagem(homenagemCarlos);
-    this.homenagensData.set(newHomenagemCarlos.id, { ...newHomenagemCarlos, approved: true });
-    
-    const homenagemJulia = {
-      name: "Júlia M.",
-      yearStart: 2015,
-      yearEnd: 2020,
-      content: "Organizadora das primeiras edições, sua criatividade e dedicação ajudaram a construir tudo o que a FK representa hoje. Sentimos sua falta todos os dias.",
-      imageUrl: ""
-    };
-    const newHomenagemJulia = this.insertHomenagem(homenagemJulia);
-    this.homenagensData.set(newHomenagemJulia.id, { ...newHomenagemJulia, approved: true });
-    
-    // Add sample familias
-    const familiaAnaPedro = {
-      title: "Ana & Pedro",
-      type: "Casal",
-      description: "Nos conhecemos na pista de dança da FK Anos 80, em 2016. Trocamos contatos, começamos a conversar, e hoje estamos casados e esperando nosso primeiro filho. Sem a FK, talvez jamais tivéssemos nos encontrado.",
-      year: 2016,
-      eventName: "FK Anos 80",
-      imageUrl: ""
-    };
-    const newFamiliaAnaPedro = this.insertFamilia(familiaAnaPedro);
-    this.familiasData.set(newFamiliaAnaPedro.id, { ...newFamiliaAnaPedro, approved: true });
-    
-    const familiaGrupoConexao = {
-      title: "Grupo Conexão",
-      type: "Amizade",
-      description: "Éramos desconhecidos que se encontraram numa Social Teórica sobre comunicação não-violenta. A conversa foi tão boa que criamos um grupo no WhatsApp naquela mesma noite. Hoje somos família, nos reunimos toda semana e já viajamos juntos várias vezes.",
-      year: 2018,
-      eventName: "FK Social Club",
-      imageUrl: ""
-    };
-    const newFamiliaGrupoConexao = this.insertFamilia(familiaGrupoConexao);
-    this.familiasData.set(newFamiliaGrupoConexao.id, { ...newFamiliaGrupoConexao, approved: true });
-    
-    // Add sample gallery images
-    for (let i = 1; i <= 8; i++) {
-      const year = 2014 + i;
-      const types = ["Festa", "Social Teórica", "Lounge", "Festa Junina"];
-      const type = types[i % 4];
-      
-      const galleryImage = {
-        imageUrl: "",
-        title: `FK ${type} ${year}`,
-        description: `Evento de ${year}`,
-        year,
-        eventType: type
+  private async initializeSampleData() {
+    try {
+      // Add sample depoimentos
+      const depoimentoMariana = {
+        name: "Mariana S.",
+        content: "A FK foi onde encontrei coragem para ser quem eu realmente sou. Em 2018, no meu primeiro evento, percebi que existia um lugar onde a liberdade e o respeito podiam coexistir. Formei amizades que levo para a vida e aprendi sobre relacionamentos de uma forma que nenhum outro espaço permitiria.",
+        year: 2018,
+        memberSince: 2016,
+        imageUrl: ""
       };
-      const newGalleryImage = this.insertGalleryImage(galleryImage);
-      this.galleryImagesData.set(newGalleryImage.id, { ...newGalleryImage, approved: true });
+      
+      const depoimentoRafael = {
+        name: "Rafael T.",
+        content: "Conheci meu atual marido na FK de 2017! Quem diria que um evento assim pudesse criar uma família? Conversamos a noite toda numa Social Teórica, trocamos contato e nunca mais nos separamos. A FK não é só festa, é um espaço de conexões profundas e transformadoras. Sou eternamente grato.",
+        year: 2017,
+        memberSince: 2015,
+        imageUrl: ""
+      };
+      
+      // Add directly to the map with approved status
+      const depoMariana: Depoimento = {
+        id: this.depoimentoId++,
+        content: depoimentoMariana.content,
+        name: depoimentoMariana.name || null,
+        year: depoimentoMariana.year || null,
+        memberSince: depoimentoMariana.memberSince || null,
+        imageUrl: depoimentoMariana.imageUrl || null,
+        approved: true,
+        createdAt: new Date()
+      };
+      this.depoimentosData.set(depoMariana.id, depoMariana);
+      
+      const depoRafael: Depoimento = {
+        id: this.depoimentoId++,
+        content: depoimentoRafael.content,
+        name: depoimentoRafael.name || null,
+        year: depoimentoRafael.year || null,
+        memberSince: depoimentoRafael.memberSince || null,
+        imageUrl: depoimentoRafael.imageUrl || null,
+        approved: true,
+        createdAt: new Date()
+      };
+      this.depoimentosData.set(depoRafael.id, depoRafael);
+      
+      // Add sample homenagens
+      const homenagemCarlos = {
+        name: "Carlos S.",
+        yearStart: 2016,
+        yearEnd: 2022,
+        content: "Seu sorriso iluminava todas as festas. Sua generosidade e espírito livre inspiraram muitos de nós. Continuamos dançando por você.",
+        imageUrl: ""
+      };
+      
+      const homenagemJulia = {
+        name: "Júlia M.",
+        yearStart: 2015,
+        yearEnd: 2020,
+        content: "Organizadora das primeiras edições, sua criatividade e dedicação ajudaram a construir tudo o que a FK representa hoje. Sentimos sua falta todos os dias.",
+        imageUrl: ""
+      };
+      
+      const homCarlos: Homenagem = {
+        id: this.homenagemId++,
+        name: homenagemCarlos.name,
+        content: homenagemCarlos.content,
+        yearStart: homenagemCarlos.yearStart || null,
+        yearEnd: homenagemCarlos.yearEnd || null,
+        imageUrl: homenagemCarlos.imageUrl || null,
+        approved: true,
+        createdAt: new Date()
+      };
+      this.homenagensData.set(homCarlos.id, homCarlos);
+      
+      const homJulia: Homenagem = {
+        id: this.homenagemId++,
+        name: homenagemJulia.name,
+        content: homenagemJulia.content,
+        yearStart: homenagemJulia.yearStart || null,
+        yearEnd: homenagemJulia.yearEnd || null,
+        imageUrl: homenagemJulia.imageUrl || null,
+        approved: true,
+        createdAt: new Date()
+      };
+      this.homenagensData.set(homJulia.id, homJulia);
+      
+      // Add sample familias
+      const familiaAnaPedro = {
+        title: "Ana & Pedro",
+        type: "Casal",
+        description: "Nos conhecemos na pista de dança da FK Anos 80, em 2016. Trocamos contatos, começamos a conversar, e hoje estamos casados e esperando nosso primeiro filho. Sem a FK, talvez jamais tivéssemos nos encontrado.",
+        year: 2016,
+        eventName: "FK Anos 80",
+        imageUrl: ""
+      };
+      
+      const familiaGrupoConexao = {
+        title: "Grupo Conexão",
+        type: "Amizade",
+        description: "Éramos desconhecidos que se encontraram numa Social Teórica sobre comunicação não-violenta. A conversa foi tão boa que criamos um grupo no WhatsApp naquela mesma noite. Hoje somos família, nos reunimos toda semana e já viajamos juntos várias vezes.",
+        year: 2018,
+        eventName: "FK Social Club",
+        imageUrl: ""
+      };
+      
+      const famAnaPedro: Familia = {
+        id: this.familiaId++,
+        title: familiaAnaPedro.title,
+        type: familiaAnaPedro.type,
+        description: familiaAnaPedro.description,
+        year: familiaAnaPedro.year || null,
+        eventName: familiaAnaPedro.eventName || null,
+        imageUrl: familiaAnaPedro.imageUrl || null,
+        approved: true,
+        createdAt: new Date()
+      };
+      this.familiasData.set(famAnaPedro.id, famAnaPedro);
+      
+      const famGrupoConexao: Familia = {
+        id: this.familiaId++,
+        title: familiaGrupoConexao.title,
+        type: familiaGrupoConexao.type,
+        description: familiaGrupoConexao.description,
+        year: familiaGrupoConexao.year || null,
+        eventName: familiaGrupoConexao.eventName || null,
+        imageUrl: familiaGrupoConexao.imageUrl || null,
+        approved: true,
+        createdAt: new Date()
+      };
+      this.familiasData.set(famGrupoConexao.id, famGrupoConexao);
+      
+      // Add sample gallery images
+      for (let i = 1; i <= 8; i++) {
+        const year = 2014 + i;
+        const types = ["Festa", "Social Teórica", "Lounge", "Festa Junina"];
+        const type = types[i % 4];
+        
+        const galleryImage: GalleryImage = {
+          id: this.galleryImageId++,
+          imageUrl: "",
+          title: `FK ${type} ${year}`,
+          description: `Evento de ${year}`,
+          year,
+          eventType: type,
+          approved: true,
+          createdAt: new Date()
+        };
+        
+        this.galleryImagesData.set(galleryImage.id, galleryImage);
+      }
+    } catch (error) {
+      console.error("Error initializing sample data:", error);
     }
   }
   
@@ -316,8 +394,11 @@ export class MemStorage implements IStorage {
   async insertParticipacao(participacao: InsertParticipacao): Promise<Participacao> {
     const createdAt = new Date();
     const newParticipacao: Participacao = {
-      ...participacao,
       id: this.participacaoId++,
+      name: participacao.name,
+      email: participacao.email,
+      type: participacao.type,
+      message: participacao.message || null,
       processed: false,
       createdAt
     };
@@ -337,8 +418,8 @@ export class MemStorage implements IStorage {
     
     const createdAt = new Date();
     const newNewsletter: Newsletter = {
-      ...newsletter,
       id: this.newsletterId++,
+      email: newsletter.email,
       createdAt
     };
     this.newslettersData.set(newNewsletter.id, newNewsletter);
