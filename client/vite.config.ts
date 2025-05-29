@@ -18,14 +18,14 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@": path.resolve(import.meta.dirname, "client", "src"),
-      "@shared": path.resolve(import.meta.dirname, "shared"),
-      "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+      "@": path.resolve(import.meta.dirname, "src"), // ← MUDOU: agora é só "src"
+      "@shared": path.resolve(import.meta.dirname, "..", "shared"), // ← MUDOU: subir um nível
+      "@assets": path.resolve(import.meta.dirname, "..", "attached_assets"), // ← MUDOU: subir um nível
     },
   },
-  root: path.resolve(import.meta.dirname, "client"),
+  // ← REMOVIDO: root não precisa mais
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
+    outDir: "dist", // ← MUDOU: agora é só "dist" (vai ficar client/dist)
     emptyOutDir: true,
   },
 });
